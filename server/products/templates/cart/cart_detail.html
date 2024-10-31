@@ -1,0 +1,99 @@
+{% extends 'server/base.html' %}
+
+{% block content_right %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        color: #707070;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    img {
+        border-radius: 5px;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 2px 1px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    .empty-cart {
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: #707070;
+    }
+</style>
+
+{% if cart.items %}
+<table>
+    <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart.items %}
+        <tr>
+            <td>
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="" width="100">
+                {% else %}
+                    <img src="/media/products_images/default.png" alt="No image available" width="100">
+                {% endif %}
+            </td>
+            <td>{{ item.product.name }}</td>
+            <td>
+                {{ item.quantity }}
+                <form method="post" action="{% url 'accounts:add_to_cart' item.product.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">+</button>
+                </form>
+                <form method="post" action="{% url 'accounts:remove_single_from_cart' item.product.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">-</button>
+                </form>
+            </td>
+            <td>{{ item.price }}</td>
+            <td>
+                <form method="post" action="{% url 'accounts:remove_from_cart' item.product.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p style="text-align: right;">Всего: {{ cart.total }}</p>
+{% else %}
+<div class="empty-cart">
+    <p>Ваша корзина пуста.</p>
+</div>
+{% endif %}
+{% endblock %}
