@@ -1,6 +1,6 @@
 from django.urls import path
 from products.views import (
-    CategoryCreate, CategoryUpdate, CategoryDelete, CategoryList, CategoryDetail
+    CategoryCreate, CategoryUpdate, CategoryDelete, CategoryList, CategoryDetail, ProductListView
 )
 
 

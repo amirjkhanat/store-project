@@ -2,112 +2,75 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-    {% block head %}
-        <head>
-            <meta charset="UTF-8">
-            <title>
-                {% block title %}
-                    {{ title|title }}
-                {% endblock %}
-            </title>
-
-            {% block css %}
-                <link rel="stylesheet"
-                  href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"
-                  integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS"
-                  crossorigin="anonymous">
-                <link rel="stylesheet" href="{% static 'server/css/base.css' %}">
-                <link rel="stylesheet" href="{% static 'server/css/menu.css' %}">
-                {% for link in link_list %}
-                    {% if link != '' %}
-                        <link rel="stylesheet" href="{% static link %}">
-                    {% endif %}
-                {% endfor %}
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                TREN GAME
             {% endblock %}
-        </head>
-    {% endblock %}
+        </title>
+        <link rel="stylesheet"
+              href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'server/css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'server/css/image.css' %}">
+        <link rel="stylesheet" href="{% static 'server/css/general.css' %}">
+        <link rel="stylesheet" href="{% static 'server/css/menu.css' %}">
+    </head>
 
-    {% block body %}
-        <body class="body_main">
-            {% block header_main %}
-                <div class="header_main">
-                    <div class="main_wrap">
-                        <a href="{% url 'main:main' %}" class="logo"></a>
-                        <div class="shop_name_wrap">
-                            <div class="shop_name_main">
-                                TREN GAME
-                            </div>
-                            <div class="shop_name_text">
-                                Добро пожаловать в магазин настольных игр и клуб по интересам
-                            </div>
-                        </div>
-                        <div class="social_icons">
-                        <div class="social_icons">
-                            <a href="#">
-                                <i class="fab fa-brands fa-vk"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-brands fa-telegram"></i>
-                            </a>
-                        </div>
-                        </div>
+    <body class="body_main">
+        <div class="header_main">
+            <div class="main_wrap">
+                <a href="{% url 'main:main' %}" class="logo"></a>
+                <div class="shop_name_wrap">
+                    <div class="shop_name_main">
+                        TREN GAMES
+                    </div>
+                    <div class="shop_name_text">
+                        Добро пожаловать в магазин настольных игр и клуб по интересам
                     </div>
                 </div>
-            {% endblock %}
-
-            <div class="content_main">
-                <div class="main_wrap">
-                    {% block content_left %}
-                        <div class="content_left">
-                            {% include 'server/includes/inc_main_menu.html' %}
-                        </div>
-                    {% endblock %}
-                    <div class="content_right">
-                        {% block content_right %}
-                        {% endblock %}
-                    </div>
+                <div class="social_icons">
+                    <a href="{% url 'main:cart_detail' %}">
+                        <i class="fa fa-shopping-bag"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                 </div>
             </div>
+        </div>
 
-            {% block footer_content %}
-                <div class="footer_content">
-                    <div class="main_wrap">
-                        <div class="footer_content_wrap">
-                            <div>
-                                <div class="column_head">
-                                    Меню
-                                </div>
-                                <div class="column_link">
-                                    <a href="{% url 'main:main' %}">Главная</a>
-                                    <a href="{% url 'products:main' %}">Каталог</a>
-                                    <a href="{% url 'main:contacts' %}">Контакты</a>
-                                    <a href="{% url 'accounts:cart_detail' %}">Корзина </a>
-                                </div>
-                            </div>
-                            <div class="about">
-                                <div class="column_head">
-                                    About Us
-                                </div>
-                                <div class="about_text_wrap">
-                                    <div class="about_text">
-                                        Добро пожаловать в TREN GAME, ваш лучший выбор для настольных игр и клубов по интересам.
-                                        Мы предлагаем широкий ассортимент игр для всех возрастов и интересов. Независимо от того, являетесь ли вы опытным игроком или только начинаете,
-                                        у нас есть что-то для каждого. Присоединяйтесь к нашему сообществу и откройте для себя радость настольных игр!
-                                    </div>
-                                    <div class="about_phone">
-                                        <span>Phone:</span> +7 999 999 99 99
-                                    </div>
-                                    <div class="about_email">
-                                        <span>e-mail:</span> contact@shop.com
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="content_main">
+            <div class="main_wrap">
+                <div class="content_left">
+                    {% include 'server/includes/inc_main_menu.html' %}
                 </div>
-            {% endblock %}
-            {% block page_scripts %}
-            {% endblock %}
-        </body>
-    {% endblock %}
+                <div class="content_right">
+                    {% block content_right %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer_copyrights">
+            <div class="main_wrap">
+                <div class="footer_copyrights_text">
+                    © 2024 TREN GAMES. Все права защищены
+                </div>
+                <div class="footer_copyrights_social">
+                    <a href="#">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

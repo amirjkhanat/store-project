@@ -26,23 +26,41 @@
         background-color: #4CAF50;
         color: white;
         border: none;
-        padding: 5px 10px;
+        padding: 10px 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 14px;
-        margin: 2px 1px;
+        font-size: 16px;
+        margin: 10px 0;
         cursor: pointer;
-        border-radius: 3px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
     button:hover {
         background-color: #45a049;
+        transform: scale(1.05);
     }
     .empty-cart {
         text-align: center;
         padding: 20px;
         font-size: 18px;
         color: #707070;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .order-button-container {
+        text-align: right;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    .total-cost {
+        display: inline-block;
+        font-size: 18px;
+        margin-right: 20px;
     }
 </style>
 
@@ -90,7 +108,13 @@
         {% endfor %}
     </tbody>
 </table>
-<p style="text-align: right;">Всего: {{ cart.total }}</p>
+<div class="order-button-container">
+    <p class="total-cost">Всего: {{ cart.total }}</p>
+    <form action="{% url 'cart:place_order' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Оформить заказ</button>
+    </form>
+</div>
 {% else %}
 <div class="empty-cart">
     <p>Ваша корзина пуста.</p>

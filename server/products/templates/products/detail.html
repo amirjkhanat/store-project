@@ -1,18 +1,17 @@
-{% extends 'server/base.html' %}
+{% extends 'categories/base.html' %}
 {% load static %}
 
-{% block content_right %}
-    <div class="content_right_header">
-        {{ object.name }}
-    </div>
-    <div class="product_img_and_short_description">
+{% block content %}
+    <hr>
+    <h1>{{ object.name }}</h1>
+    <div class="product_img_and_short_descroption">
         {% if object.image %}
             <a href="{{ object.image.url }}" target="_blank">
-                <img src="{{ object.image.url }}" alt={{ object.name }} class="game_image">
+                <img src="{{ object.image.url }}" alt="{{ object.name }}" class="game_image">
             </a>
         {% else %}
             <a href="/media/products_images/default.png" target="_blank">
-                <img src="/media/products_images/default.png" alt={{ object.name }} class="game_image">
+                <img src="/media/products_images/default.png" alt="{{ object.name }}" class="game_image">
             </a>
         {% endif %}
         <div class="product_short_description_wrap">
@@ -22,7 +21,7 @@
             </p>
             <form method="post" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
-                <button type="submit">Добавить в корзину</button>
+                <button class="buy" type="submit">В корзину</button>
             </form>
         </div>
     </div>

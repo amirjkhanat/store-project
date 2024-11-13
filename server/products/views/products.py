@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from products.models import Product, ProductCategory
 from products.forms import ProductModelForm
+from django.shortcuts import render, get_object_or_404
 
 
 class ProductList(ListView):
@@ -14,12 +15,15 @@ class ProductList(ListView):
     template_name = 'products/index.html'
     paginate_by = 3
 
+    def get_queryset(self):
+        return Product.objects.all().order_by('name')  # Order by a specific field, e.g., 'name'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Каталог'
         context['link_list'] = ['']
         context['menu'] = ProductCategory.objects.all()
-
+        context['categories'] = ProductCategory.objects.all()
         return context
 
 
@@ -34,6 +38,11 @@ class ProductDetail(DetailView):
         context['menu'] = ProductCategory.objects.all()
 
         return context
+
+
+def product_detail(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'products/detail.html', {'object': product})
 
 
 class ProductCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):

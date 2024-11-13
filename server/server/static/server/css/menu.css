@@ -51,11 +51,9 @@
 /*    width: 270px;*/
 /*    z-index: 1;*/
 /*}*/
-
 .menu_wrap,
 .menu_wrap li ul {
-    background-color: #26d2fc;
-    margin-top: -20px;
+    background-color: #545454;
 }
 
 .menu_wrap * {
@@ -81,7 +79,7 @@
     position: relative;
 }
 
- .menu_wrap > ul li a {
+.menu_wrap > ul li a {
     display: block;
     padding-left: 40px;
     text-decoration: none;
@@ -100,8 +98,8 @@
 .menu_wrap li ul {
     display: none;
     position: absolute;
-    top: 20px;
-    right: -270px;
+    top: 0; /* Aligns the top of the dropdown with the top of the parent menu item */
+    left: 100%; /* Positions the dropdown to the right of the parent menu item */
     width: 270px;
     z-index: 1;
 }

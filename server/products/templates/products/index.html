@@ -1,14 +1,29 @@
-{% extends 'server/base.html' %}
+{% extends 'categories/base.html' %}
 {% load static %}
 
-{% block content_right %}
+{% block content %}
     <div class="content_right_header">
-        Каталог
+        <h1>Каталог</h1>
     </div>
     <div class="content_right_product">
-        {% for product in object_list %}
-            {% include 'server/includes/inc_product.html' with id=product.id status=product.status image=product.image name=product.name price_now=product.price_now price_old=product.price_old %}
-        {% endfor %}
+        <div class="product-list-wrapper">
+            {% for product in object_list %}
+                <div class="catalog_product_unit">
+                    <div class="product_img_and_short_descroption">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="catalog_image">
+                        {% else %}
+                            <img src="{% static 'products/img/default.png' %}" alt="{{ product.name }}" class="product_image">
+                        {% endif %}
+                        <div class="product_short_description_wrap">
+                            <h2 class="product_header">{{ product.name }}</h2>
+                            <p class="product_price">{{ product.price_now }} руб.</p>
+                            <a href="{% url 'product_detail' product.id %}" class="buy">Купить</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     {% include 'server/includes/inc_pagination.html' with page=page_obj paginator=paginator %}
@@ -41,20 +56,17 @@
 
         const renderProduct = ({id, name, price_now, price_old, image_url, status}) => (
             `
-            <a href="/products/${ id }/"
-                class="product_unit
-                    ${ status === 'new' ? 'product_unit_new' : ''}
-                    ${ status === 'hot' ? 'product_unit_hot' : ''}">
-                <img src="${ image_url ? image_url : '/media/products_images/default.png' }"
-                    alt="${ name }">
-                <div class="product_unit_name">
-                    ${ name }
+            <div class="catalog_product_unit">
+                <div class="product_img_and_short_descroption">
+                    <img src="${ image_url ? image_url : '/media/products_images/default.png' }" alt="${ name }" class="product_image">
+                    <div class="product_short_description_wrap">
+                        <h2 class="product_header">${ name }</h2>
+                        <p class="product_short_description">${ name }</p>
+                        <p class="product_price">${ price_now } ₽</p>
+                        <a href="/products/${ id }/" class="buy">Купить</a>
+                    </div>
                 </div>
-                <div class="product_unit_price_wrap">
-                    <div class="product_unit_price_actual">${ price_now } ₽</div>
-                    ${ status === 'sale' ? '<div class="product_unit_price_old">' + price_old + ' ₽</div>' : ''}
-                </div>
-            </a>
+            </div>
             `
         );
 

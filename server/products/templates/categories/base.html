@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TREN GAME{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style/image.css' %}">
+    <link rel="stylesheet" href="{% static 'style/general.css' %}">
+    <link rel="stylesheet" href="{% static 'style/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'style/product.css' %}">
+    <link rel="stylesheet" href="{% static 'style/image.css' %}">
+</head>
+
+<body>
+    <div class="container">
+    <a href="{% url 'main:main' %}">
+        <div class="header">
+            <img src="{% static 'images/logo.png' %}" alt="Логотип">
+            <div class="shop_name">
+                <strong>Магазин настольных игр TREN GAME</strong>
+            </div>
+            <ul class="menu">
+                <li class="root"><a href="{% url 'main:main' %}">Главная</a></li>
+                <li class="root"><a href="{% url 'main:product_list' %}">Каталог</a></li>
+                <li class="root"><a href="{% url 'main:cart_detail' %}">Корзина</a></li>
+                <li class="root"><a href="{% url 'main:contacts' %}">Контакты</a></li>
+            </ul>
+        </div>
+    </a>
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="footer">&copy;2024 TREN GAMES. Все права защищены</div>
+    </div>
+</body>
+
+</html>

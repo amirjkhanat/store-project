@@ -1,0 +1,27 @@
+{% extends 'server/base.html' %}
+
+{% block content_right %}
+<style>
+    .order-success {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .order-success h2 {
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+    .order-success p {
+        color: #333;
+    }
+</style>
+
+<div class="order-success">
+    <h2>Спасибо за ваш заказ!</h2>
+    <p>Ваш заказ был успешно оформлен. Мы свяжемся с вами в ближайшее время.</p>
+</div>
+{% endblock %}

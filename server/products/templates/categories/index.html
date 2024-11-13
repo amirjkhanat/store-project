@@ -1,9 +1,9 @@
-{% extends 'server/base.html' %}
+{% extends 'categories/base.html' %}
 {% load static %}
 
-{% block content_right %}
-    <div class="content_right_header">
-        Категории
+{% block content %}
+    <div class="block">
+       <h1>Категории</h1>
     </div>
     <div class="content_right_product">
         {% for category in object_list %}

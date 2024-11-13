@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'carton',
+    'cart',
 
     'main',
     'products',
@@ -126,7 +127,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('main:main')
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
